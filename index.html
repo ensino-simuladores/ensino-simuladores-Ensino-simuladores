@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENSINO-SIMULADORES · Simuladores para o ensino secundário de Moçambique</title>
+<meta name="description" content="Simuladores virtuais de experiências de Física, Química, Biologia e outras áreas, baseados no currículo do ensino secundário de Moçambique.">
+<style>
+:root{--bg:#f6f8f5;--card:#fff;--tx:#1b2a22;--mut:#5f6f66;--pri:#0b7a43;--pri2:#e6f4ec;--acc:#f2b01e;--bd:#dbe4de;--err:#b3261e;--ok:#0b7a43}
+@media (prefers-color-scheme:dark){:root{--bg:#101814;--card:#18231d;--tx:#e8f0ea;--mut:#9fb2a6;--pri:#3ecf87;--pri2:#1c3226;--bd:#2b3b32;--err:#ff8a80;--ok:#3ecf87}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;background:var(--card);border-bottom:4px solid var(--acc);position:sticky;top:0;z-index:5}
+.logo{font-weight:800;font-size:1.1rem;color:var(--pri)}
+.logo span{display:block;color:var(--mut);font-weight:500;font-size:.78rem}
+#nav{display:flex;gap:8px}
+button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:9px 14px}
+button.p{background:var(--pri);color:#fff;border-color:var(--pri);font-weight:600}
+@media (prefers-color-scheme:dark){button.p{color:#06140c}}
+button:disabled{opacity:.6;cursor:wait}
+main{max-width:960px;margin:0 auto;padding:24px 18px 48px}
+h1{margin:.2em 0}h2{margin:1.6em 0 .3em;color:var(--pri)}
+.hero{background:var(--pri2);border-radius:16px;padding:22px}
+.hero p{margin:.6em 0 0}
+.lema{color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
+.cls{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;text-align:left;font-size:1.05rem}
+.cls b{display:block;font-size:1.6rem;color:var(--pri)}
+.cls:hover,.cls.on{border-color:var(--pri);box-shadow:0 0 0 2px var(--pri2)}
+#panel{margin-top:18px;background:var(--card);border:1px dashed var(--pri);border-radius:14px;padding:20px;display:none}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:20}
+.overlay.show{display:flex}
+.modal{background:var(--card);border-radius:16px;padding:24px;width:100%;max-width:430px;max-height:92vh;overflow:auto}
+.modal h2{margin-top:0}
+.tabs{display:flex;gap:8px;margin-bottom:8px}.tabs button{flex:1}
+.tabs button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+@media (prefers-color-scheme:dark){.tabs button.on{color:#06140c}}
+label{display:block;margin:12px 0 4px;font-weight:600;font-size:.9rem}
+input,select{width:100%;padding:11px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit}
+input:focus,select:focus{outline:2px solid var(--pri)}
+.msg{min-height:1.3em;margin-top:10px;font-size:.9rem;color:var(--err)}.msg.ok{color:var(--ok)}
+.row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}.row button{flex:1}
+.link{background:none;border:0;color:var(--pri);padding:6px 0;text-decoration:underline}
+.avatar{width:72px;height:72px;border-radius:50%;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:700;margin:0 auto 8px}
+footer{text-align:center;color:var(--mut);font-size:.85rem;padding:20px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">📘 ENSINO-SIMULADORES<span>Ensino Secundário · Moçambique</span></div>
+  <div id="nav"></div>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>ENSINO-SIMULADORES</h1>
+    <p class="lema"><em>Aprenda experimentando, sem precisar de laboratório.</em></p>
+    <p id="ola" style="font-weight:600"></p>
+    <p>O ENSINO-SIMULADORES é uma plataforma de ensino e aprendizagem para o ensino secundário de Moçambique, desenvolvida pelo professor de Física Angelo Bola.</p>
+    <p>O seu objectivo é disponibilizar simuladores virtuais que permitem realizar experiências que, na prática, exigem material de laboratório de custo elevado. Com base no currículo moçambicano, o aluno pode simular fenómenos físicos, químicos, biológicos e de outras áreas, observar os resultados e aprender de forma prática, segura e acessível, em qualquer lugar.</p>
+  </section>
+
+  <h2>1.º Ciclo</h2>
+  <div class="grid">
+    <button class="cls" data-c="7"><b>7.ª</b>Classe</button>
+    <button class="cls" data-c="8"><b>8.ª</b>Classe</button>
+    <button class="cls" data-c="9"><b>9.ª</b>Classe</button>
+  </div>
+  <h2>2.º Ciclo</h2>
+  <div class="grid">
+    <button class="cls" data-c="10"><b>10.ª</b>Classe</button>
+    <button class="cls" data-c="11"><b>11.ª</b>Classe</button>
+    <button class="cls" data-c="12"><b>12.ª</b>Classe</button>
+  </div>
+  <div id="panel"></div>
+</main>
+<footer>© ENSINO-SIMULADORES · Ensino Secundário · Moçambique</footer>
+
+<!-- Entrar / Inscrever -->
+<div class="overlay" id="auth">
+  <div class="modal">
+    <div class="tabs"><button id="tEntrar">Entrar</button><button id="tInscrever">Inscrever-me</button></div>
+    <div id="fEntrar">
+      <h2>Entrar</h2>
+      <label for="le">Email</label><input id="le" type="email" autocomplete="email">
+      <label for="lp">Palavra-passe</label><input id="lp" type="password" autocomplete="current-password">
+      <button class="link" id="esqueci" type="button">Esqueci a palavra-passe</button>
+      <div class="msg" id="m1"></div>
+      <div class="row"><button id="x1">Fechar</button><button class="p" id="bEntrar">Entrar</button></div>
+    </div>
+    <div id="fInscrever" style="display:none">
+      <h2>Inscreva-se</h2>
+      <label for="rn">Nome completo</label><input id="rn" autocomplete="name" placeholder="Ex.: Ana Maria Macuácua">
+      <label for="rp">Profissão</label>
+      <select id="rp">
+        <option value="">Seleccione a sua profissão…</option>
+        <option>Professor</option><option>Director</option><option>Aluno</option><option>Encarregado de Educação</option>
+      </select>
+      <label for="rc">Contacto</label><input id="rc" type="tel" autocomplete="tel" placeholder="Ex.: +258 84 123 4567">
+      <label for="re">Email</label><input id="re" type="email" autocomplete="email">
+      <label for="rs">Palavra-passe</label><input id="rs" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres">
+      <label for="rs2">Repita a palavra-passe</label><input id="rs2" type="password" autocomplete="new-password">
+      <div class="msg" id="m2"></div>
+      <div class="row"><button id="x2">Fechar</button><button class="p" id="bInscrever">Inscrever-me</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Perfil -->
+<div class="overlay" id="prf">
+  <div class="modal">
+    <div class="avatar" id="av"></div>
+    <h2 style="text-align:center">O meu perfil</h2>
+    <label for="pn">Nome completo</label><input id="pn">
+    <label for="pp">Profissão</label>
+    <select id="pp"><option>Professor</option><option>Director</option><option>Aluno</option><option>Encarregado de Educação</option></select>
+    <label for="pc">Contacto</label><input id="pc" type="tel">
+    <label for="pe">Email</label><input id="pe" disabled>
+    <div class="msg" id="m3"></div>
+    <div class="row"><button id="x3">Fechar</button><button id="bSair">Terminar sessão</button><button class="p" id="bGuardar">Guardar</button></div>
+  </div>
+</div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged,sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,doc,setDoc,getDoc,updateDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey: "AIzaSyAToUJj2m7HbH838lo_6BDUd1mCfRbR_2o",
+  authDomain: "ensino-simuladores.firebaseapp.com",
+  projectId: "ensino-simuladores",
+  storageBucket: "ensino-simuladores.firebasestorage.app",
+  messagingSenderId: "298090409656",
+  appId: "1:298090409656:web:9c79ec22abf6688bb5ce4d"
+});
+const auth = getAuth(app), db = getFirestore(app);
+const $ = id => document.getElementById(id);
+let perfil = null, registando = false;
+
+const ERROS = {
+  "auth/email-already-in-use":"Este email já está inscrito. Use o separador Entrar.",
+  "auth/invalid-email":"Email inválido.",
+  "auth/weak-password":"A palavra-passe deve ter pelo menos 6 caracteres.",
+  "auth/invalid-credential":"Email ou palavra-passe incorrectos.",
+  "auth/user-not-found":"Email ou palavra-passe incorrectos.",
+  "auth/wrong-password":"Email ou palavra-passe incorrectos.",
+  "auth/too-many-requests":"Muitas tentativas. Tente de novo mais tarde.",
+  "auth/network-request-failed":"Sem ligação à internet.",
+  "permission-denied":"Sem permissão para guardar. Verifique as regras do Firestore."
+};
+const erro = e => ERROS[e.code] || ERROS[(e.code||"").replace("firestore/","")] || "Ocorreu um erro. Tente novamente.";
+const say = (id, t, ok) => { const m = $(id); m.textContent = t; m.className = "msg" + (ok ? " ok" : ""); };
+const fechar = () => document.querySelectorAll(".overlay").forEach(o => o.classList.remove("show"));
+
+function render() {
+  const nav = $("nav");
+  nav.innerHTML = "";
+  if (perfil) {
+    const b = document.createElement("button");
+    b.className = "p"; b.textContent = "👤 " + perfil.nome.split(" ")[0];
+    b.onclick = abrirPerfil; nav.appendChild(b);
+    $("ola").textContent = "Olá, " + perfil.nome.split(" ")[0] + "! Bem-vindo(a).";
+  } else {
+    const b = document.createElement("button");
+    b.className = "p"; b.textContent = "Entrar / Inscrever-me";
+    b.onclick = () => abrirAuth("entrar"); nav.appendChild(b);
+    $("ola").textContent = "";
+    $("panel").style.display = "none";
+    document.querySelectorAll(".cls").forEach(x => x.classList.remove("on"));
+  }
+}
+
+function abrirAuth(aba) {
+  const ent = aba === "entrar";
+  $("fEntrar").style.display = ent ? "" : "none";
+  $("fInscrever").style.display = ent ? "none" : "";
+  $("tEntrar").classList.toggle("on", ent);
+  $("tInscrever").classList.toggle("on", !ent);
+  ["m1","m2"].forEach(i => say(i, ""));
+  $("auth").classList.add("show");
+}
+
+function abrirPerfil() {
+  $("av").textContent = perfil.nome.trim().charAt(0).toUpperCase();
+  $("pn").value = perfil.nome; $("pp").value = perfil.profissao;
+  $("pc").value = perfil.contacto; $("pe").value = perfil.email;
+  say("m3", ""); $("prf").classList.add("show");
+}
+
+onAuthStateChanged(auth, async u => {
+  if (registando) return;
+  if (u) {
+    try {
+      const s = await getDoc(doc(db, "users", u.uid));
+      perfil = s.exists() ? s.data() : {nome: u.email, profissao: "Aluno", contacto: "", email: u.email};
+    } catch (e) { perfil = {nome: u.email, profissao: "Aluno", contacto: "", email: u.email}; }
+  } else perfil = null;
+  render();
+});
+
+function validar(n, p, c) {
+  if (n.split(" ").length < 2) return "Escreva o nome completo (nome e apelido).";
+  if (!p) return "Escolha a sua profissão na lista.";
+  if (!/^\+?[0-9 ]{9,15}$/.test(c)) return "Contacto inválido. Use 9 a 15 dígitos.";
+  return "";
+}
+
+$("tEntrar").onclick = () => abrirAuth("entrar");
+$("tInscrever").onclick = () => abrirAuth("inscrever");
+["x1","x2","x3"].forEach(i => $(i).onclick = fechar);
+
+$("bEntrar").onclick = async () => {
+  const b = $("bEntrar"); b.disabled = true; say("m1", "");
+  try { await signInWithEmailAndPassword(auth, $("le").value.trim(), $("lp").value); fechar(); }
+  catch (e) { say("m1", erro(e)); }
+  b.disabled = false;
+};
+
+$("esqueci").onclick = async () => {
+  const em = $("le").value.trim();
+  if (!em) return say("m1", "Escreva o seu email acima e carregue de novo.");
+  try { await sendPasswordResetEmail(auth, em); say("m1", "Enviámos um email para recuperar a palavra-passe.", true); }
+  catch (e) { say("m1", erro(e)); }
+};
+
+$("bInscrever").onclick = async () => {
+  const n = $("rn").value.trim().replace(/\s+/g, " "), p = $("rp").value, c = $("rc").value.trim();
+  const em = $("re").value.trim().toLowerCase(), s = $("rs").value;
+  let m = validar(n, p, c);
+  if (!m && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) m = "Email inválido. Exemplo: nome@exemplo.com";
+  if (!m && s.length < 6) m = "A palavra-passe deve ter pelo menos 6 caracteres.";
+  if (!m && s !== $("rs2").value) m = "As palavras-passe não coincidem.";
+  if (m) return say("m2", m);
+  const b = $("bInscrever"); b.disabled = true; say("m2", "");
+  registando = true;
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, em, s);
+    const dados = {nome: n, profissao: p, contacto: c, email: em};
+    await setDoc(doc(db, "users", cred.user.uid), {...dados, criadoEm: serverTimestamp()});
+    perfil = dados; registando = false; render(); fechar();
+  } catch (e) {
+    registando = false; say("m2", erro(e));
+    if (auth.currentUser) { perfil = {nome: em, profissao: "Aluno", contacto: "", email: em}; render(); }
+  }
+  b.disabled = false;
+};
+
+$("bGuardar").onclick = async () => {
+  const n = $("pn").value.trim().replace(/\s+/g, " "), p = $("pp").value, c = $("pc").value.trim();
+  const m = validar(n, p, c); if (m) return say("m3", m);
+  try {
+    await updateDoc(doc(db, "users", auth.currentUser.uid), {nome: n, profissao: p, contacto: c});
+    perfil = {...perfil, nome: n, profissao: p, contacto: c}; render(); say("m3", "Perfil actualizado.", true);
+  } catch (e) { say("m3", erro(e)); }
+};
+
+$("bSair").onclick = async () => { await signOut(auth); fechar(); };
+
+document.querySelectorAll(".cls").forEach(b => b.onclick = () => {
+  if (!perfil) return abrirAuth("inscrever");
+  document.querySelectorAll(".cls").forEach(x => x.classList.remove("on")); b.classList.add("on");
+  const c = +b.dataset.c, p = $("panel");
+  p.style.display = "block";
+  p.innerHTML = "";
+  const h = document.createElement("h3"); h.style.marginTop = "0"; h.textContent = c + ".ª Classe · " + (c < 10 ? "1.º" : "2.º") + " Ciclo";
+  const t = document.createElement("p"); t.style.color = "var(--mut)"; t.textContent = "Os conteúdos e simuladores desta classe estarão disponíveis em breve.";
+  p.append(h, t); p.scrollIntoView({behavior: "smooth", block: "nearest"});
+});
+
+render();
+</script>
+</body>
+</html>
